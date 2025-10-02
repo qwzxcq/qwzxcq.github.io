@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>привет это короче ну это для тебя крч пук пук 👉👈</h1>
+
+    <main>
+        <div class="input-group">
+            <label for="answer1">Наш ребенок?</label>
+            <input type="text" id="answer1" placeholder="зеленый...">
+        </div>
+
+        <div class="input-group">
+            <label for="answer2">Как я тебя ласково зову?</label>
+            <input type="text" id="answer2" placeholder="ну всегда крч">
+        </div>
+
+        <div class="input-group">
+            <label for="answer3">сколько стоят деньги</label>
+            <input type="text" id="answer3" placeholder="(2^2)*(10^4)">
+        </div>
+
+        <button onclick="checkAnswers()">Открыть сюрприз ✨</button>
+        <div class="error" id="errorMessage"></div>
+    </main>
+
+    <script>
+        function checkAnswers() {
+
+            const answer1 = document.getElementById('answer1').value.toLowerCase().trim();
+            const answer2 = document.getElementById('answer2').value.toLowerCase().trim();
+            const answer3 = document.getElementById('answer3').value.toLowerCase().trim();
+            const errorElement = document.getElementById('errorMessage');
+
+            errorElement.textContent = '';
+        
+            const correctAnswers = {
+                answer1: 'ебланчик', 
+                answer2: 'милая',     
+                answer3: '40000'     
+            };
+
+            let isValid = true;
+            let errorMessage = '';
+
+
+            if (answer1 !== correctAnswers.answer1) {
+                isValid = false;
+                errorMessage = 'начинается на "ебланчи"';
+            } else if (answer2 !== correctAnswers.answer2) {
+                isValid = false;
+                errorMessage = 'дефолт ты че забыла';
+            } else if (answer3 !== correctAnswers.answer3) {
+                isValid = false;
+                errorMessage = 'ВСЯ ЭТА КРОВЬ МНЕЕЕЕ!!!!!';
+            }
+
+            if (isValid) {
+
+                window.location.href = 'win.html'; 
+            } else {
+
+                errorElement.textContent = errorMessage;
+                
+
+                errorElement.style.animation = 'shake 0.5s ease-in-out';
+                setTimeout(() => {
+                    errorElement.style.animation = '';
+                }, 500);
+            }
+        }
+
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                checkAnswers();
+            }
+        });
+
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
